@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+
+    <form>
+        <label>Search Flickr Images
+            <input name="tags" id="tags" />
+        </label>
+            <input type="submit" value="Find Images" />
+    </form>
+
+    <h2 id="image-container-title"></h2>
+    <div id="image-container"></div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="@{js/site.js}"></script>
+
+</body>
+</html>
