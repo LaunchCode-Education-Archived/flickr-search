@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <link href="@{css/styles.css}" rel="stylesheet" />
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -17,7 +17,7 @@
     <div id="image-container"></div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="@{js/site.js}"></script>
+    <script type="text/javascript" th:src="@{js/site.js}"></script>
 
 </body>
 </html>
