@@ -2,6 +2,8 @@ package org.launchcode.flickrsearch.controllers;
 
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.auth.Auth;
+import com.flickr4java.flickr.photos.Photo;
+import com.flickr4java.flickr.photos.PhotoList;
 import org.launchcode.flickrsearch.api.FlickrService;
 import org.scribe.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class IndexController {
     private static final String requestTokenKey = "flickr.reqtoken";
 
     @Autowired
-    private FlickrService connector;
+    private FlickrService flickrService;
 
     @RequestMapping(value = "")
     public String index(){
@@ -31,9 +33,9 @@ public class IndexController {
 
     @RequestMapping(value = "auth")
     public String auth(Model model, HttpServletRequest req){
-        Token token = connector.generateRequestToken();
+        Token token = flickrService.generateRequestToken();
         setRequestToken(token, req);
-        model.addAttribute("authUrl", connector.getAuthUrl(token));
+        model.addAttribute("authUrl", flickrService.getAuthUrl(token));
         return "auth";
     }
 
@@ -41,12 +43,21 @@ public class IndexController {
     public String auth_callback(@RequestParam(name="oauth_verifier") String tokenKey,
                                 HttpServletRequest req, Model model) {
         try {
-            Auth flickrUser = connector.authorize(getRequestToken(req), tokenKey);
-            model.addAttribute("flickrUser", flickrUser);
+            Auth flickrUser = flickrService.authorize(getRequestToken(req), tokenKey);
+            setUserToken(flickrUser.getToken(), req);
         } catch (FlickrException e) {
             model.addAttribute("flickrUser", null);
         }
         return "auth";
+    }
+
+    @RequestMapping(value = "user_photos")
+    public String userPhotos(Model model, HttpServletRequest req) throws FlickrException {
+        Token token = new Token(getRequestToken(req).toString(), getUserToken(req));
+        PhotoList<Photo> photos = flickrService.getRecentPhotos(token);
+        model.addAttribute("flickrUser", flickrService.getUser(token));
+        model.addAttribute("photos", photos);
+        return "user-photos";
     }
 
     private String getUserToken(HttpServletRequest req) {
