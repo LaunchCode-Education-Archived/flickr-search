@@ -26,6 +26,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-devtools')
 	compile('org.json:json')
+	compile('com.flickr4java:flickr4java:2.17')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
