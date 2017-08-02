@@ -45,24 +45,4 @@ public class FlickrService {
         return flickr.getAuthInterface().checkToken(requestToken);
     }
 
-    public PhotoList<Photo> getRecentPhotos(Token token) throws FlickrException {
-        RequestContext requestContext = RequestContext.getRequestContext();
-        Auth auth = new Auth();
-        auth.setToken(token.getToken());
-        auth.setTokenSecret(token.getSecret());
-        requestContext.setAuth(auth);
-        return flickr.getPhotosInterface().getRecent(null, 20, 0);
-    }
-
-    public User getUser(Token token) {
-        return getAuth(token).getUser();
-    }
-
-    private Auth getAuth(Token token) {
-        Auth auth = new Auth();
-        auth.setToken(token.getToken());
-        auth.setTokenSecret(token.getSecret());
-        return auth;
-    }
-
 }

@@ -45,19 +45,11 @@ public class IndexController {
         try {
             Auth flickrUser = flickrService.authorize(getRequestToken(req), tokenKey);
             setUserToken(flickrUser.getToken(), req);
+            model.addAttribute("flickrUser", flickrUser);
         } catch (FlickrException e) {
             model.addAttribute("flickrUser", null);
         }
         return "auth";
-    }
-
-    @RequestMapping(value = "user_photos")
-    public String userPhotos(Model model, HttpServletRequest req) throws FlickrException {
-        Token token = new Token(getRequestToken(req).toString(), getUserToken(req));
-        PhotoList<Photo> photos = flickrService.getRecentPhotos(token);
-        model.addAttribute("flickrUser", flickrService.getUser(token));
-        model.addAttribute("photos", photos);
-        return "user-photos";
     }
 
     private String getUserToken(HttpServletRequest req) {
