@@ -1,4 +1,4 @@
-package org.launchcode.flickrsearch.models;
+package org.launchcode.flickrsearch.api;
 
 import org.json.JSONObject;
 import org.json.XML;
@@ -12,7 +12,7 @@ import java.net.URLConnection;
 /**
  * Created by LaunchCode
  */
-public class FlickrConnector {
+public class FlickrPublicConnector {
 
     public static String fetchImageJson(String[] tags) {
 
