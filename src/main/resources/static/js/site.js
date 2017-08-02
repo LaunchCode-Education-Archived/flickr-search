@@ -33,9 +33,8 @@ function handleSubmitJ() {
     var tags = document.getElementById("tags").value;
     tags = tags.replace(' ', '');
 
-    $.ajax("/get_flickr_data", {
-        data: {tags: tags},
-        type: "POST",
+    $.get({
+        url: "/search/tags/"+tags,
         success: fetchSuccess,
         error: fetchError,
         dataType: 'json'
