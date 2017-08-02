@@ -2,8 +2,6 @@ package org.launchcode.flickrsearch.controllers;
 
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.auth.Auth;
-import com.flickr4java.flickr.photos.Photo;
-import com.flickr4java.flickr.photos.PhotoList;
 import org.launchcode.flickrsearch.api.FlickrService;
 import org.scribe.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;

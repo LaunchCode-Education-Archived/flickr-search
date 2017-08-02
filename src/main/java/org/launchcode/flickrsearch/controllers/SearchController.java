@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "search")
 public class SearchController {
 
-    @Autowired
-    private FlickrService connector;
-
     @RequestMapping(value = "tags/{tags}")
     public String getFlickrData(@PathVariable String[] tags){
         return FlickrPublicConnector.fetchImageJson(tags);
